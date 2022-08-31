@@ -1,0 +1,29 @@
+/*Preparando o ambiente do ZERO:
+  1) Instalar o node.js e o VS Code;
+  *No VS Code:
+  2) Procurar e instalar a extensão "Code Runner";
+  3) Criar a pasta do projeto;
+  4) No terminal, digitar: npm install prompt-sync;
+  5) Ativar no menu: File -> Preferences -> settings - Extensions -> Run Code configuration === marcar "box Run in Terminal";
+  6) No terminal, digitar: npm init -y;
+  7) No terminal: digitar: npm install express.
+  
+  *Ambiente preparado para começar o projeto!
+*/
+
+const express = require('express'); //Passo 1
+const app = express(); // Passo 2
+
+app.use(express.json()); //Passo 3
+
+app.get('/', (req, res, next) => {});
+
+// () => {} ou function() {}
+
+app.listen(3000, () => {
+    console.log('API está ON!')
+});
+
+app.get('/', (req, res, next) => {
+    res.status(200).json({ msg: "Na escuta!"})
+});
