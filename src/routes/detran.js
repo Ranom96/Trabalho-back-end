@@ -82,10 +82,19 @@ router.put('/:id', (req, res, next) => {
     if (!atualizarDBase) {
         res.status(404).json({ msg: "Veículo não encontrado" })
     }
+    atualizarDBase.registro = req.body.registro
+    res.status(204).end();
 
 })
 
-router.delete()
+router.delete('/:id', (req, res, next) => {
+    let deletarContato = dBase.splice(req.params.id - 1, 1)
+    if (!req.params.id) {
+        res.status(404).json({ msg: "Veículo não pode ser deletado pois não foi encontrado!" })
+    }
+    res.status(200).json([deletarContato, { msg: "Veículo deletado!" }]);
+
+})
 
 
 module.exports = router;
