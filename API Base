@@ -6,11 +6,23 @@
   4) No terminal, digitar: npm install prompt-sync;
   5) Ativar no menu: File -> Preferences -> settings -> Extensions -> Run Code configuration === marcar "box Run in Terminal";
   6) No terminal, digitar: npm init -y;
-  7) No terminal: digitar: npm install express.
+  7) No terminal, digitar: npm install express;
+  8) No terminal, digitar: npm install -D noemon;
+  9) No terminal, digitar: npm install http-erros.
   
   *Ambiente preparado para começar o projeto!
 */
 
+/* 
+//package.json
+...
+"scripts" : {
+    "start": "nodemon app.js", //substitui -> "start": "node app.js"
+    "test": "jest --watchAll"
+}
+*/
+
+//app.js
 const express = require('express'); //Passo 1
 const app = express(); // Passo 2
 
@@ -20,10 +32,16 @@ app.get('/', (req, res, next) => {});
 
 // () => {} ou function() {}
 
+app.get('/', (req, res, next) => {
+    res.status(200).json({ msg: "Na escuta!"})
+});
+
 app.listen(3000, () => {
     console.log('API está ON!')
 });
 
-app.get('/', (req, res, next) => {
-    res.status(200).json({ msg: "Na escuta!"})
-});
+/*
+- para executar app.js no terminal, digitar:
+node app.js ou npm start
+ctrl + c (stop!)
+*/
