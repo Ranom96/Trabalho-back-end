@@ -54,7 +54,7 @@ router.get('/:id', (req, res, next) => {
     if (!dBaseItem) {
         return res.status(404).json({ msg: "Veículo não encontrado" })
     }
-    res.json(dBaseItem);
+    res.json(dBaseItem)
 
 })
 
