@@ -1,9 +1,8 @@
 const express = require('express');
+const indexController = require('../controllers/indexController')
 
 const router = express();
 
-router.get('/', (req, res, next) =>{
-    res.json("API de Busca");
-});
+router.get('/', indexController.mensagemAPI);
 
 module.exports = router;
