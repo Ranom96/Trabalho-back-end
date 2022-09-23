@@ -8,8 +8,6 @@ const detranRouter = require('./routes/detran');
 
 const pmRouter = require('./routes/pm');
 
-const prfRouter = require('./routes/prf');
-
 const indexRouter = require('./routes/index');
 
 // INCLUINDO MIDDLEWARE
@@ -17,7 +15,6 @@ const indexRouter = require('./routes/index');
 app.use(express.json(),
     detranRouter,
     pmRouter,
-    prfRouter,
     indexRouter);
 
 

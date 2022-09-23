@@ -1,6 +1,4 @@
-# Trabalho-back-end
 Trabalho ADS 3 Semestre
-
 
 Projeto:
 
@@ -14,7 +12,7 @@ Grupo:
 
 Iev de Souza Cruz Mesquita
 
-Ranom Morais Ruiz 
+Ranom Morais Ruiz
 
 João Marcos Silvestre de Alencar
 
