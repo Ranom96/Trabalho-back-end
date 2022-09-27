@@ -1,0 +1,155 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API de busca de carros",
+        "description": "Api faz busca de carros cadastrados nos bancos de dado"
+    },
+    "paths": {
+        "/detran": {
+            "get": {
+                "description": "Devolve lista de carros cadastrados",
+                "responses": {
+                    "200": {
+                        "description": "Sucesso"
+                    },
+                    "content": {
+                        "application / json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#components/schemas/carrosDetran"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/detran/{id}": {
+            "get": {
+                "description": "Exibe um carro pelo ID",
+                "parameters": [{
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "number"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Carro encontrado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#components/schemas/carrosDetran"
+                                }
+                            }
+                        }
+                    }
+                }
+
+            },
+            "put": {
+                "description": "Atualiza uma propriedade do Carro",
+                "requestBody": {
+                    "description": "Atualiza característica do carro",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "parada": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [{
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "number"
+                    }
+                }],
+                "responses": {
+                    "204": {
+                        "description": "Carro atualizado com sucesso"
+                    },
+                    "404": {
+                        "description": "Veículo não encontrado"
+
+                    }
+                }
+            }
+        },
+        "components": {
+            "schemas": {
+                "carrosDetran": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "integer",
+                            "description": "identificador"
+                        },
+                        "placa": {
+                            "type": "string",
+                            "example": "PKJ - 1752"
+                        },
+                        "chassi": {
+                            "type": "string",
+                            "example": "9BWHE21JX24060831"
+                        },
+                        " modelo": {
+                            "type": "string",
+                            " example": "GOL GTI 2013"
+                        },
+                        " cor": {
+                            "type": "string",
+                            " example": "vermelho"
+                        },
+                        " marca": {
+                            "type": "string",
+                            " example": "Volkswagen"
+                        },
+                        " registro": {
+                            "type": "string",
+                            " example": "Iev de Souza"
+                        },
+                        " IPVA": {
+                            "type": "boolean",
+                            "  example": false
+                        },
+                        " multas_vencidas": {
+                            "type": "integer",
+                            " example": "3"
+                        },
+                        " total_multas": {
+                            "type": "string",
+                            " example": "R$ 327,78"
+                        },
+                        " sinistro": {
+                            "type": "boolean",
+                            "example": false
+                        },
+                        " seguro": {
+                            "type": "boolean",
+                            "example": false
+                        },
+                        "parada": {
+                            "type": "boolean",
+                            "example": "false"
+                        }
+                    }
+
+
+                }
+            }
+        }
+    }
+}

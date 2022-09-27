@@ -2,6 +2,8 @@ const express = require('express');
 
 const app = express();
 
+
+
 // INCLUINDO ROTA
 
 const detranRouter = require('./routes/detran');
