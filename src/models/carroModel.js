@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+// TODO #13 Criar model de carros com mongoose @Kievv
+
 const carroSchema = new mongoose.Schema({
   placa: {
     type: String,
