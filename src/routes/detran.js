@@ -1,13 +1,12 @@
 const express = require('express');
-const detranController = require('../controllers/detranController')
+const CarroController = require('../controllers/carroController');
 
 const router = express.Router();
 
-router.get('/detran', detranController.listarCarros)
+router.get('/detran/carros', CarroController.listarCarros);
 
-router.get('/detran/:id', detranController.listarCarrosPorId)
+router.get('/detran/carros/:id', CarroController.consultaCarroPorPlaca);
 
-router.put('/detran/:id', detranController.atualizarCarro)
-
+router.put('/detran/carros/:id', CarroController.criarOcorrencia);
 
 module.exports = router;
