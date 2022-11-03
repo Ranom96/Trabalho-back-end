@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const carroSchema = new mongoose.Schema({
+const carroSchema = new mongoose.Schema({ 
   placa: {
     type: String,
     required: true,
