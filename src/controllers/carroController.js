@@ -1,7 +1,25 @@
 const Carro = require('../models/carroModel.js');
+const Ocorrencia = require('../models/ocorrenciasModel');
 
 class CarroController {
-  static async criarOcorrencia(req, res) {}
+  static async criarOcorrencia(req, res) {
+    novaOcorrencia = new Ocorrencia(req.body);
+    await Carro.findOneAndUpdate({ placa: req.params.id }, { $push: { ocorrencias: req.body } })
+      .then((carro) => {
+        if (carro) {
+          return res.json(carro);
+        } else {
+          return res.status(404).json('Carro não localizado');
+        }
+      })
+      .catch((error) => {
+        const msgErro = {};
+        Object.values(error.errors).forEach(({ properties }) => {
+          msgErro[properties.path] = properties.message;
+        });
+        return res.status(500).json(msgErro);
+      });
+  }
 
   static async listarCarros(req, res) {
     await Carro.find({})

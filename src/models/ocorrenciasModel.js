@@ -1,7 +1,7 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const multasSchema = new mongoose.Schema({
-  tipo: {
+  infracao: {
     type: String,
     required: true,
   },
@@ -14,19 +14,37 @@ const multasSchema = new mongoose.Schema({
 const ocorrenciaSchema = new mongoose.Schema({
   IPVAatrasado: {
     type: Boolean,
+    default: false,
   },
-  multas: {
-    type: multasSchema,
-  },
+  multas: [
+    {
+      type: multasSchema,
+      default: false,
+    },
+  ],
   roubo: {
     type: Boolean,
+    default: false,
   },
   envolvidoAcidente: {
     type: Boolean,
+    default: false,
   },
-  placa: {
-    type: Schema.Types.ObjectId,
-    ref: "Carro",
+  revisao: {
+    type: Boolean,
     required: true,
+    default: false,
+  },
+  chamar_guincho: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
+  placa_clonada: {
+    type: Boolean,
+    required: true,
+    default: false,
   },
 });
+
+module.exports = mongoose.model('Ocorrencia', ocorrenciaSchema);
