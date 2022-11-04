@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const carroSchema = new mongoose.Schema({
   placa: {
@@ -20,7 +20,7 @@ const carroSchema = new mongoose.Schema({
     required: true,
     trim: true,
     uppercase: true,
-    maxLength: [20, 'O modelo do carro deve conter até 20 caracteres'],
+    maxLength: [20, "O modelo do carro deve conter até 20 caracteres"],
   },
   cor: {
     type: String,
@@ -32,22 +32,14 @@ const carroSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
-    minLength: [3, 'A marca do carro deve conter ao menos 3 letras'],
+    minLength: [3, "A marca do carro deve conter ao menos 3 letras"],
   },
   registro: {
     type: String,
     required: true,
     trim: true,
-    minLength: [3, 'É necessário inserir o nome completo'],
-  },
-  IPVA: {
-    type: Boolean,
-    required: true,
-  },
-  seguro: {
-    type: Boolean,
-    required: true,
+    minLength: [3, "É necessário inserir o nome completo"],
   },
 });
 
-module.exports = mongoose.model('Carro', carroSchema);
+module.exports = mongoose.model("Carro", carroSchema);
