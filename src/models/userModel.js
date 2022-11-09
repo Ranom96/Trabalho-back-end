@@ -1,4 +1,5 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
 
 const usersSchema = new mongoose.Schema(
   {
@@ -8,7 +9,7 @@ const usersSchema = new mongoose.Schema(
     },
     funcao: {
       type: String,
-      enum: ['detran', 'pm', 'pc', 'prf'],
+      enum: ["detran", "pm", "pc", "prf"],
       required: true,
     },
     distintivo: {
@@ -29,4 +30,9 @@ const usersSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model('Usuario', usersSchema);
+// usersSchema.pre("save", async (next) => {
+//   this.password = await bcrypt.hashSync(this.password, 8);
+//   next();
+// });
+
+module.exports = mongoose.model("Usuario", usersSchema);

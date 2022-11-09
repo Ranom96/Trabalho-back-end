@@ -18,8 +18,9 @@ class LoginController {
         if (usuario) {
           return res.status(400).send({ error: 'Usuário já existe' });
         } else {
-          const user = User.create(req.body);
-          user.password = undefined;
+          const user = new User(req.body);
+          user.password = await bcrypt.hashSync(user.password, 8);
+          user.save()
           return res.send({
             user,
             token: this.generateToken({ id: user.id }),
@@ -50,7 +51,7 @@ class LoginController {
       });
     }
 
-    // Como fazer a autenticação checar se o usuário possúi qual função permitindo que acesse apenas as rotas referentes a tal órgão?
+    // Como fazer a autenticação checar se o usuário possui com função permitindo que acesse apenas as rotas referentes a tal órgão?
     return res.status(200).json({
       user: {
         nome: userExist.nome,
