@@ -1,10 +1,10 @@
-const User = require('../models/userModel');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const config = require('../authDetran');
+const User = require("../models/userModel");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const config = require("../authDetran");
 
 class LoginController {
-  generateToken(params = {}) {
+  static generateToken(params = {}) {
     return jwt.sign(params, config.secret, {
       expiresIn: config.expireIn,
     });
@@ -16,38 +16,38 @@ class LoginController {
     await User.findOne({ distintivo })
       .then((usuario) => {
         if (usuario) {
-          return res.status(400).send({ error: 'Usuário já existe' });
+          return res.status(400).send({ error: "Usuário já existe" });
         } else {
           const user = new User(req.body);
-          user.password = await bcrypt.hashSync(user.password, 8);
-          user.save()
+          user.password = bcrypt.hashSync(user.password, 8);
+          user.save();
           return res.send({
             user,
-            token: this.generateToken({ id: user.id }),
+            token: generateToken({ id: user._id }),
           });
         }
       })
       .catch((error) => {
-        res.status(400).send({ error: 'Falha no cadastro' });
+        return res.status(400).json("Deu erro");
       });
   }
 
   async index(req, res) {
     const { distintivo, password } = req.body;
 
-    const userExist = await User.findOne({ distintivo }).select('+password');
+    const userExist = await User.findOne({ distintivo }).select("+password");
 
     if (!userExist) {
       return res.status(400).json({
         error: true,
-        message: 'O usuário ou senha são inválidos',
+        message: "O usuário ou senha são inválidos",
       });
     }
 
     if (!(await bcrypt.compare(password, userExist.password))) {
       return res.status(400).json({
         error: true,
-        message: 'O usuário ou senha são inválidos',
+        message: "O usuário ou senha são inválidos",
       });
     }
 
@@ -58,7 +58,7 @@ class LoginController {
         password: userExist.distintivo,
         funcao: userExist.funcao,
       },
-      token: this.generateToken({ id: User.id }),
+      token: this.generateToken({ id: User._id }),
     });
   }
 }

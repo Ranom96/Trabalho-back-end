@@ -2,6 +2,31 @@ const Carro = require("../models/carroModel.js");
 const Ocorrencia = require("../models/ocorrenciasModel");
 
 class CarroController {
+  static async criarCarro(req, res) {
+    const { placa } = req.body;
+
+    await Carro.findOne({ placa })
+      .then((carro) => {
+        if (!carro) {
+          const novoCarro = new Carro(req.body);
+          novoCarro.save();
+          return res.status(201).send("Carro cadastrado com sucesso");
+        } else {
+          return res.status(400).send({
+            error:
+              "Carro já cadastrado, verifique com sua agência de trânsito por falsificações",
+          });
+        }
+      })
+      .catch((error) => {
+        const msgErro = {};
+        Object.values(error.errors).forEach(({ properties }) => {
+          msgErro[properties.path] = properties.message;
+        });
+        return res.status(500).json(msgErro);
+      });
+  }
+
   static async criarOcorrencia(req, res) {
     novaOcorrencia = new Ocorrencia(req.body);
     await Carro.findOneAndUpdate(
