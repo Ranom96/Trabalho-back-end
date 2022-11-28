@@ -1,12 +1,12 @@
 const express = require('express');
-const pcController = require('../controllers/pcController');
+const carroController = require('../controllers/carroController');
 
 const router = express.Router();
 
-router.get('/pc', pcController.listarCarros);
+router.get('/pc', carroController.listarCarros);
 
-router.get('/pc/:id', pcController.listarCarrosPorId);
+router.get('/pc/carro/:id', carroController.consultaCarroPorPlaca);
 
-router.put('/pc/:id', pcController.atualizarCarro);
+router.put('/pc/ocorrencia/:id', carroController.criarOcorrencia);
 
 module.exports = router;

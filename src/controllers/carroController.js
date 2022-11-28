@@ -1,5 +1,5 @@
-const Carro = require("../models/carroModel.js");
-const Ocorrencia = require("../models/ocorrenciasModel");
+const Carro = require('../models/carroModel.js');
+const Ocorrencia = require('../models/ocorrenciasModel');
 
 class CarroController {
   static async criarCarro(req, res) {
@@ -10,34 +10,11 @@ class CarroController {
         if (!carro) {
           const novoCarro = new Carro(req.body);
           novoCarro.save();
-          return res.status(201).send("Carro cadastrado com sucesso");
+          return res.status(201).send('Carro cadastrado com sucesso');
         } else {
           return res.status(400).send({
-            error:
-              "Carro já cadastrado, verifique com sua agência de trânsito por falsificações",
+            error: 'Carro já cadastrado, verifique com sua agência de trânsito por falsificações',
           });
-        }
-      })
-      .catch((error) => {
-        const msgErro = {};
-        Object.values(error.errors).forEach(({ properties }) => {
-          msgErro[properties.path] = properties.message;
-        });
-        return res.status(500).json(msgErro);
-      });
-  }
-
-  static async criarOcorrencia(req, res) {
-    novaOcorrencia = new Ocorrencia(req.body);
-    await Carro.findOneAndUpdate(
-      { placa: req.params.id },
-      { $push: { ocorrencias: req.body } }
-    )
-      .then((carro) => {
-        if (carro) {
-          return res.json(carro);
-        } else {
-          return res.status(404).json("Carro não localizado");
         }
       })
       .catch((error) => {
@@ -67,7 +44,7 @@ class CarroController {
         if (carro) {
           return res.json(carro);
         } else {
-          return res.status(404).json("Carro não localizado");
+          return res.status(404).json('Carro não localizado');
         }
       })
       .catch((error) => {
@@ -83,7 +60,7 @@ class CarroController {
         if (carro) {
           return res.status(204).end();
         } else {
-          return res.status(404).json("Carro não localizado");
+          return res.status(404).json('Carro não localizado');
         }
       })
       .catch((error) => {
@@ -95,7 +72,42 @@ class CarroController {
       });
   }
 
-  static async removerOcorrencia(req, res) {}
+  static async criarOcorrencia(req, res) {
+    novaOcorrencia = new Ocorrencia(req.body);
+    await Carro.findOneAndUpdate({ placa: req.params.id }, { $push: { ocorrencias: novaOcorrencia } })
+      .then((carro) => {
+        if (carro) {
+          return res.json(carro);
+        } else {
+          return res.status(404).json('Carro não localizado');
+        }
+      })
+      .catch((error) => {
+        const msgErro = {};
+        Object.values(error.errors).forEach(({ properties }) => {
+          msgErro[properties.path] = properties.message;
+        });
+        return res.status(500).json(msgErro);
+      });
+  }
+
+  static async removerOcorrencia(req, res) {
+    await Carro.findOneAndUpdate({ placa: req.params.id }, { ocorrencia: { $elemMatch: { tipo: req.body.tipo } } })
+      .then((carro) => {
+        if (carro) {
+          return res.json(carro);
+        } else {
+          return res.status(404).json('Carro não localizado');
+        }
+      })
+      .catch((error) => {
+        const msgErro = {};
+        Object.values(error.errors).forEach(({ properties }) => {
+          msgErro[properties.path] = properties.message;
+        });
+        return res.status(500).json(msgErro);
+      });
+  }
 }
 
 module.exports = CarroController;
