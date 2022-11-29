@@ -1,0 +1,661 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API de busca de carros",
+        "description": "Api faz busca de carros cadastrados nos bancos de dado"
+    },
+    "paths": {
+        "/detran/carros": {
+            "get": {
+                "tags": [
+                    "detran"
+                ],
+                "description": "Devolve lista de carros cadastrados",
+                "responses": {
+                    "200": {
+                        "description": "Sucesso"
+                    },
+                    "content": {
+                        "application / json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#components/schemas/carrosDetran"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/detran/carro/{id}": {
+            "get": {
+                "tags": [
+                    "detran"
+                ],
+                "description": "Exibe um carro pelo ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Carro encontrado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#components/schemas/carrosDetran"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/detran/ocorrencia/carros/{id}": {
+            "put": {
+                "tags": [
+                    "detran"
+                ],
+                "description": "Atualiza uma ocorrencia do Carro",
+                "requestBody": {
+                    "description": "Atualiza característica do carro",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "IPVAatrasado": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Ocorrencia atualizada com sucesso"
+                    },
+                    "404": {
+                        "description": "Veículo não encontrado"
+                    }
+                }
+            }
+        },
+        "/detran/carros/{id}/ocorrencia/{oc}": {
+            "put": {
+                "tags": [
+                    "detran"
+                ],
+                "description": "Deleta uma ocorrencia do Carro",
+                "requestBody": {
+                    "description": "Atualiza característica do carro",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "IPVAatrasado": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "oc",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Ocorrencia atualizada com sucesso"
+                    },
+                    "404": {
+                        "description": "Veículo não encontrado"
+                    }
+                }
+            }
+        },
+        "/pm/carros": {
+            "get": {
+                "tags": [
+                    "pm"
+                ],
+                "description": "Devolve lista de carros cadastrados",
+                "responses": {
+                    "200": {
+                        "description": "Sucesso"
+                    },
+                    "content": {
+                        "application / json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#components/schemas/carros"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/pm/carro/{id}": {
+            "get": {
+                "tags": [
+                    "pm"
+                ],
+                "description": "Exibe um carro pelo ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Carro encontrado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#components/schemas/carros"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/pm/ocorrencia/carros/{id}": {
+            "put": {
+                "tags": [
+                    "pm"
+                ],
+                "description": "Atualiza uma ocorrencia do Carro",
+                "requestBody": {
+                    "description": "Atualiza característica do carro",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "IPVAatrasado": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Ocorrencia atualizada com sucesso"
+                    },
+                    "404": {
+                        "description": "Veículo não encontrado"
+                    }
+                }
+            }
+        },
+        "/pm/carros/{id}/ocorrencia/{oc}": {
+            "put": {
+                "tags": [
+                    "pm"
+                ],
+                "description": "Deleta uma ocorrencia do Carro",
+                "requestBody": {
+                    "description": "Atualiza característica do carro",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "IPVAatrasado": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "oc",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Ocorrencia atualizada com sucesso"
+                    },
+                    "404": {
+                        "description": "Veículo não encontrado"
+                    }
+                }
+            }
+        },
+        "/pc/carros": {
+            "get": {
+                "tags": [
+                    "pc"
+                ],
+                "description": "Devolve lista de carros cadastrados",
+                "responses": {
+                    "200": {
+                        "description": "Sucesso"
+                    },
+                    "content": {
+                        "application / json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#components/schemas/carros"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/pc/carro/{id}": {
+            "get": {
+                "tags": [
+                    "pc"
+                ],
+                "description": "Exibe um carro pelo ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Carro encontrado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#components/schemas/carros"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/pc/ocorrencia/carros/{id}": {
+            "put": {
+                "tags": [
+                    "pc"
+                ],
+                "description": "Atualiza uma ocorrencia do Carro",
+                "requestBody": {
+                    "description": "Atualiza característica do carro",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "IPVAatrasado": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Ocorrencia atualizada com sucesso"
+                    },
+                    "404": {
+                        "description": "Veículo não encontrado"
+                    }
+                }
+            }
+        },
+        "/pc/carros/{id}/ocorrencia/{oc}": {
+            "put": {
+                "tags": [
+                    "pc"
+                ],
+                "description": "Deleta uma ocorrencia do Carro",
+                "requestBody": {
+                    "description": "Atualiza característica do carro",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "IPVAatrasado": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "oc",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Ocorrencia atualizada com sucesso"
+                    },
+                    "404": {
+                        "description": "Veículo não encontrado"
+                    }
+                }
+            }
+        },
+        "/prf/carros": {
+            "get": {
+                "tags": [
+                    "prf"
+                ],
+                "description": "Devolve lista de carros cadastrados",
+                "responses": {
+                    "200": {
+                        "description": "Sucesso"
+                    },
+                    "content": {
+                        "application / json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#components/schemas/carros"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/prf/carro/{id}": {
+            "get": {
+                "tags": [
+                    "prf"
+                ],
+                "description": "Exibe um carro pelo ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Carro encontrado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#components/schemas/carros"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/prf/ocorrencia/carros/{id}": {
+            "put": {
+                "tags": [
+                    "prf"
+                ],
+                "description": "Atualiza uma ocorrencia do Carro",
+                "requestBody": {
+                    "description": "Atualiza característica do carro",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "IPVAatrasado": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Ocorrencia atualizada com sucesso"
+                    },
+                    "404": {
+                        "description": "Veículo não encontrado"
+                    }
+                }
+            }
+        },
+        "/prf/carros/{id}/ocorrencia/{oc}": {
+            "put": {
+                "tags": [
+                    "prf"
+                ],
+                "description": "Deleta uma ocorrencia do Carro",
+                "requestBody": {
+                    "description": "Atualiza característica do carro",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "IPVAatrasado": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "oc",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Ocorrencia atualizada com sucesso"
+                    },
+                    "404": {
+                        "description": "Veículo não encontrado"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "carros": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "identificador"
+                    },
+                    "placa": {
+                        "type": "string",
+                        "example": "PKJ - 1752"
+                    },
+                    "chassi": {
+                        "type": "string",
+                        "example": "9BWHE21JX24060831"
+                    },
+                    " modelo": {
+                        "type": "string",
+                        "example": "GOL GTI 2013"
+                    },
+                    " cor": {
+                        "type": "string",
+                        "example": "vermelho"
+                    },
+                    " marca": {
+                        "type": "string",
+                        "example": "Volkswagen"
+                    },
+                    " registro": {
+                        "type": "string",
+                        "example": "Iev de Souza"
+                    },
+                    " ocorrencias": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "IPVAatrasado": {
+                                    "type": " Boolean"
+                                },
+                                "roubo": {
+                                    "type": "Boolean"
+                                },
+                                "envolvidoAcidente": {
+                                    "type": "Boolean"
+                                },
+                                "revisao": {
+                                    "type": "Boolean"
+                                },
+                                "chamar_guincho": {
+                                    "type": "Boolean"
+                                },
+                                "placa_clonada": {
+                                    "type": "Boolean"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
