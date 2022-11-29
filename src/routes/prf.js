@@ -1,15 +1,21 @@
-const express = require("express");
-const prfController = require("../controllers/prfController");
+const express = require('express');
+const LoginController = require('../controllers/LoginController');
+const carroController = require('../controllers/carroController');
+const prfAuth = require('../Midlewares/AuthMidPRF');
 
 const router = express.Router();
 
+router.post('/login', LoginController.index);
+
 // GET listar todos os veículos do BD
-router.get("/prf", prfController.listarCarros);
+router.get('/carros', prfAuth, carroController.listarCarros);
 
 //GET ID listar um veículo específico pelo ID
-router.get("/prf/:id", prfController.listarCarrosPorId);
+router.get('/carro/:id', prfAuth, carroController.consultaCarroPorPlaca);
 
 //PUT ID atualizar um veículo pelo ID
-router.put("/prf/:id", prfController.atualizarCarro);
+router.put('/ocorrencia/carros/:id', prfAuth, carroController.criarOcorrencia);
+
+router.delete('/carros/:id/ocorrencia/:oc', prfAuth, carroController.removerOcorrencia);
 
 module.exports = router;

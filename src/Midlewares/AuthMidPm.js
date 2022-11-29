@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const config = require('../Authenticators/authDetran');
+const config = require('../Authenticators/authPM');
 const { promisify } = require('util');
 
 module.exports = async (req, res, next) => {
