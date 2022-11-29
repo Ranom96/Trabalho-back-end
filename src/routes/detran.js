@@ -5,12 +5,14 @@ const detranAuth = require('../Midlewares/AuthMidDetran.js');
 
 const router = express.Router();
 
-router.post('/detran/login', LoginController.index);
+router.post('/login', LoginController.index);
 
-router.get('/detran/carros', detranAuth, CarroController.listarCarros);
+router.get('/carros', detranAuth, CarroController.listarCarros);
 
-router.get('/detran/carros/:id', detranAuth, CarroController.consultaCarroPorPlaca);
+router.get('/carro/:id', detranAuth, CarroController.consultaCarroPorPlaca);
 
-router.put('/detran/ocorrencia/carros/:id', detranAuth, CarroController.criarOcorrencia);
+router.put('/ocorrencia/carros/:id', detranAuth, CarroController.criarOcorrencia);
+
+router.delete('/carros/:id/ocorrencia/:oc', detranAuth, CarroController.removerOcorrencia);
 
 module.exports = router;

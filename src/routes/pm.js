@@ -1,12 +1,18 @@
 const express = require('express');
 const carroController = require('../controllers/carroController');
+const LoginController = require('../controllers/LoginController');
+const pmAuth = require('../Midlewares/AuthMidPm');
 
 const router = express.Router();
 
-router.get('/pm', carroController.listarCarros);
+router.post('/login', LoginController.index);
 
-router.get('/pm/:id', carroController.consultaCarroPorPlaca);
+router.get('/carros', pmAuth, carroController.listarCarros);
 
-router.put('/pm/ocorrencia/:id', carroController.criarOcorrencia);
+router.get('/carro/:id', pmAuth, carroController.consultaCarroPorPlaca);
+
+router.put('/ocorrencia/carros/:id', pmAuth, carroController.criarOcorrencia);
+
+router.delete('/carros/:id/ocorrencia/:oc', pmAuth, carroController.removerOcorrencia);
 
 module.exports = router;
